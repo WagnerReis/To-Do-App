@@ -1,0 +1,9 @@
+.container {
+  background: transparent;
+  width: 46rem;
+  min-height: 25.3125rem;
+
+  margin: 0 auto;
+  margin-top: -1.6875rem;
+  border-radius: 8px;
+}
