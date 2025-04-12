@@ -35,3 +35,31 @@
 .inputContainer button:hover {
   background: var(--blue);
 }
+
+.tasksContainer {
+  width: 100%;
+  margin-top: 5.6875rem;
+}
+
+.tasksInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.tasksInfo span {
+  padding: .3rem .8rem;
+  background: var(--gray-400);
+  border-radius: 15px;
+  color: var(--gray-200);
+}
+
+.tasksInfo .createds {
+  color: var(--blue);
+}
+
+.tasksInfo .completeds {
+  color: var(--purple);
+}
