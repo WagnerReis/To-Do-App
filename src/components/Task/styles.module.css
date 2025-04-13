@@ -1,0 +1,81 @@
+.task {
+  background: var(--gray-500);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.task+.task {
+  margin-top: .75rem;
+}
+
+.taskContent {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+}
+
+.taskContentIcon {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taskContentText {
+  flex: 1;
+  word-break: break-word;
+  color: var(--gray-100)
+}
+
+.taskContentTextCompleted {
+  flex: 1;
+  word-break: break-word;
+  text-decoration: line-through;
+}
+
+.check {
+  background: var(--purple-dark);
+  padding: .2rem;
+  border-radius: 50%;
+
+  display: flex;
+  transition: background .1s;
+  cursor: pointer;
+}
+
+.check:hover {
+  background: var(--purple);
+}
+
+.circle {
+  background: transparent;
+  border-radius: 50%;
+  color: var(--blue);
+  transition: color .1s;
+  cursor: pointer;
+}
+
+.circle:hover {
+  color: var(--blue-dark);
+}
+
+.trash {
+  background: transparent;
+  border-radius: 6px;
+  height: 100%;
+  display: flex;
+  padding: .1rem;
+  cursor: pointer;
+
+  transition: background .1s, color .1s;
+}
+
+.trash:hover {
+  background: var(--gray-400);
+  color: var(--red)
+}
