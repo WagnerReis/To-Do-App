@@ -27,12 +27,12 @@ This is a modern to-do list application built with React that allows you to mana
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/wagnerreis/challenge-01-to-do-list.git
+git clone https://github.com/WagnerReis/To-Do-App.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd challenge-01-to-do-list
+cd To-Do-App
 ```
 
 3. Install dependencies:
@@ -42,7 +42,7 @@ npm install
 
 4. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
 5. Open your browser and visit `http://localhost:5173`
