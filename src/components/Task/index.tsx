@@ -35,7 +35,7 @@ export function Task({
         <p className={completed ? styles.taskContentTextCompleted : styles.taskContentText}>{description}</p>
       </div>
       <div onClick={() => onDeleteTask(id)} className={styles.trash}>
-        <Trash size={24}  />
+        <Trash  />
       </div>
     </div>
   )

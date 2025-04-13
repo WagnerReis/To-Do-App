@@ -6,11 +6,23 @@ import styles from './styles.module.css'
 import clipboard from '../../assets/clipboard.svg'
 
 import { CreateTaskProps, Task } from '../Task'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 export function Main() {
-  const [tasks, setTasks] = useState<CreateTaskProps[]>([])
+  const [tasks, setTasks] = useState<CreateTaskProps[]>(() => {
+    try {
+      const storedTasks = localStorage.getItem('tasks');
+      return storedTasks ? JSON.parse(storedTasks) : [];
+    } catch (err) {
+      console.error('Error loading initial tasks', err);
+      return [];
+    }
+  });
   const [newTask, setNewTask] = useState('')
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const tasksIsEmpty = !tasks.length
   const totalOfTasks = tasks.length
