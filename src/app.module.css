@@ -1,9 +1,19 @@
 .container {
   background: transparent;
-  width: 46rem;
+  width: 100%;
+  max-width: 46rem;
   min-height: 25.3125rem;
-
   margin: 0 auto;
   margin-top: -1.6875rem;
   border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
 }
