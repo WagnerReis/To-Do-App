@@ -5,11 +5,11 @@ import styles from './styles.module.css'
 
 import clipboard from '../../assets/clipboard.svg'
 
-import { Task, TaskProps } from '../Task'
+import { CreateTaskProps, Task } from '../Task'
 import { ChangeEvent, FormEvent, useState } from 'react'
 
 export function Main() {
-  const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [tasks, setTasks] = useState<CreateTaskProps[]>([])
   const [newTask, setNewTask] = useState('')
 
   const tasksIsEmpty = !tasks.length
@@ -34,6 +34,20 @@ export function Main() {
 
   function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('Este campo é obrigatório!')
+  }
+
+  function completeTask(id: string) {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        const isCompleted = task.completed
+
+        task.completed = !isCompleted
+      }
+
+      return task
+    })
+
+    setTasks(updatedTasks)
   }
 
   return (
@@ -70,6 +84,7 @@ export function Main() {
               id={task.id}
               description={task.description}
               completed={task.completed}
+              onCompleteTask={completeTask}
             />
           ))
         )}
