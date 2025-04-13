@@ -1,63 +1,59 @@
 import { PlusCircle } from 'phosphor-react'
+import { v4 as uuidv4 } from 'uuid'
 
 import styles from './styles.module.css'
 
 import clipboard from '../../assets/clipboard.svg'
 
-import { Task } from '../Task'
-
-const tasks = [
-  {
-    id: '1',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    completed: false
-  },
-  {
-    id: '2',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  },
-  {
-    id: '3',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  },
-  {
-    id: '4',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  },
-  {
-    id: '5',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  },
-  {
-    id: '6',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  },
-  {
-    id: '7',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci earum pariatur veniam explicabo, blanditiis vero quis accusantium unde. Necessitatibus ipsa dignissimos optio excepturi voluptates reprehenderit veritatis, eum tempore aliquid nulla!',
-    completed: false
-  }
-]
-
-const tasksIsEmpty = !tasks.length
+import { Task, TaskProps } from '../Task'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 export function Main() {
+  const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [newTask, setNewTask] = useState('')
+
+  const tasksIsEmpty = !tasks.length
+  const totalOfTasks = tasks.length
+  const tasksCompleted = totalOfTasks > 0 ? tasks.filter(task => task.completed === true).length : 0
+
+  function handleCreateNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('')
+    setNewTask(event.target.value)
+  }
+
+  function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault()
+
+    setTasks((state) => [...state, {
+      id: uuidv4(),
+      description: newTask,
+      completed: false
+    }])
+    setNewTask('')
+  }
+
+  function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Este campo é obrigatório!')
+  }
+
   return (
     <main className={styles.main}>
-      <div className={styles.inputContainer}>
-        <input type="text" placeholder="Adicione uma nova tarefa" />
+      <form onSubmit={handleCreateNewTask} className={styles.inputContainer}>
+        <input 
+          onChange={handleCreateNewTaskChange} 
+          type="text" 
+          placeholder="Adicione uma nova tarefa"
+          onInvalid={handleNewTaskInvalid}
+          value={newTask}
+          required
+        />
         <button type="submit">Criar <PlusCircle size={16} weight="bold"/></button>
-      </div>
+      </form>
 
       <div className={styles.tasksContainer}>
         <div className={styles.tasksInfo}>
-          <p className={styles.createds}>Tarefas criadas <span>0</span></p>
-          <p className={styles.completeds}>Concluídas <span>0 de 5</span></p>
+          <p className={styles.createds}>Tarefas criadas <span>{totalOfTasks}</span></p>
+          <p className={styles.completeds}>Concluídas <span>{tasksCompleted} de {totalOfTasks}</span></p>
         </div>
 
         <div className={tasksIsEmpty ? styles.emptyTasks : styles.tasks}>

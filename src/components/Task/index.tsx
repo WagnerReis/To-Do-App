@@ -1,7 +1,7 @@
 import { Check, Circle, Trash } from 'phosphor-react';
 import styles from './styles.module.css'
 
-interface TaskProps {
+export interface TaskProps {
   id: string;
   description: string;
   completed: boolean
