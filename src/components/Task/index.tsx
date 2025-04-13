@@ -6,11 +6,18 @@ export interface TaskProps {
   description: string;
   completed: boolean;
   onCompleteTask: (id: string) => void;
+  onDeleteTask: (id: string) => void;
 }
 
-export type CreateTaskProps = Omit<TaskProps, 'onCompleteTask'>
+export type CreateTaskProps = Omit<TaskProps, 'onCompleteTask' | 'onDeleteTask'>
 
-export function Task({ id, description, completed, onCompleteTask }: TaskProps) {
+export function Task({ 
+  id, 
+  description, 
+  completed, 
+  onCompleteTask, 
+  onDeleteTask 
+}: TaskProps) {
   function handleCompleteTask() {
     onCompleteTask(id)
   }
@@ -27,7 +34,7 @@ export function Task({ id, description, completed, onCompleteTask }: TaskProps) 
         </div>
         <p className={completed ? styles.taskContentTextCompleted : styles.taskContentText}>{description}</p>
       </div>
-      <div className={styles.trash}>
+      <div onClick={() => onDeleteTask(id)} className={styles.trash}>
         <Trash size={24}  />
       </div>
     </div>

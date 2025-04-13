@@ -50,6 +50,12 @@ export function Main() {
     setTasks(updatedTasks)
   }
 
+  function deleteTask(id: string) {
+    const tasksWihtouDeletedOne = tasks.filter(task => task.id !== id)
+
+    setTasks(tasksWihtouDeletedOne)
+  }
+
   return (
     <main className={styles.main}>
       <form onSubmit={handleCreateNewTask} className={styles.inputContainer}>
@@ -85,6 +91,7 @@ export function Main() {
               description={task.description}
               completed={task.completed}
               onCompleteTask={completeTask}
+              onDeleteTask={deleteTask}
             />
           ))
         )}
